@@ -1,0 +1,31 @@
+<project default="compile">
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes"/>
+    </target>
+    
+    <target name="jar">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/AlgoKit.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="com.mihsathe.algokit.main.Main"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="build">
+        <ant target="clean"/>
+        <ant target="compile"/>
+        <ant target="jar"/>
+    </target>
+
+    <target name="run">
+        <java jar="build/jar/AlgoKit.jar" fork="true"/>
+    </target>
+
+</project>
