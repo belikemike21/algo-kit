@@ -37,17 +37,17 @@ public class Main {
         smallTests.runTests();
 
         final SortingTests mediumTests = new SortingTests(Arrays.asList(binaryInsertionSorter,
-        		    mergeSorter,
-        		    concurrentMergeSorter,
-        		    quickSorter,
-        		    javaSorter), 200000);
+                    mergeSorter,
+                    concurrentMergeSorter,
+                    quickSorter,
+                    javaSorter), 200000);
 
         mediumTests.runTests();
 
         final SortingTests bigTests = new SortingTests(Arrays.asList(mergeSorter,
-        	        concurrentMergeSorter,
-        	        quickSorter,
-        	        javaSorter), 10000000);
+                    concurrentMergeSorter,
+                    quickSorter,
+                    javaSorter), 10000000);
 
         bigTests.runTests();
 

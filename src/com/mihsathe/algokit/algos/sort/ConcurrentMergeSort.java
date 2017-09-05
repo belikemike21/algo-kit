@@ -48,7 +48,7 @@ public class ConcurrentMergeSort<K> implements Sorter<K> {
         @Override
         public List<K> call() {
             try {
-        	        return sort(input, isGreater);
+                    return sort(input, isGreater);
             } catch(final Exception ex) {
                 throw new RuntimeException(ex);
             }

@@ -19,26 +19,26 @@ public class BinarySearch<K extends Comparable<K>> implements Searcher<K> {
 
     @Override
     public int search(final List<K> list, final int start, final int end, final K searchable, final BiPredicate<K,K> isGreater) {
-    	    return _search(list, start, end, isGreater, searchable);
+            return _search(list, start, end, isGreater, searchable);
     }
 
     private int _search(final List<K> list, final int start, final int end, final BiPredicate<K,K> isGreater, final K searchable) {
         final int mid = (start + end) / 2;
         if(list.get(mid) == searchable) return mid;
 
-    	    if(start == end) {
-    	    	    if (isGreater.test(list.get(mid), searchable)) {
-    	    	        return mid;
-    	    	    } else {
-    	    	        return mid + 1;
-    	    	    }
-    	    }
+            if(start == end) {
+                    if (isGreater.test(list.get(mid), searchable)) {
+                        return mid;
+                    } else {
+                        return mid + 1;
+                    }
+            }
 
-    	    if(isGreater.test(list.get(mid), searchable)) {
-    	        return _search(list, start, mid, isGreater, searchable);
-    	    } else {
-    	        return _search(list, mid+1, end, isGreater, searchable);
-    	    }
+            if(isGreater.test(list.get(mid), searchable)) {
+                return _search(list, start, mid, isGreater, searchable);
+            } else {
+                return _search(list, mid+1, end, isGreater, searchable);
+            }
     }
 
 }

@@ -11,7 +11,7 @@ import java.util.function.BiPredicate;
  */
 public class JavaSort<K> implements Sorter<K> {
 
-	@Override
+    @Override
     public String getAlgorithmName() {
         return "JavaSort";
     }
@@ -24,16 +24,16 @@ public class JavaSort<K> implements Sorter<K> {
 
     private static class Comp<K> implements Comparator<K> {
 
-    	    private final BiPredicate<K, K> isGreater;
+            private final BiPredicate<K, K> isGreater;
 
-    	    public Comp(final BiPredicate<K, K> isGreater) {
-    	        this.isGreater = isGreater;
-    	    }
+            public Comp(final BiPredicate<K, K> isGreater) {
+                this.isGreater = isGreater;
+            }
 
-		@Override
-		public int compare(K a, K b) {
-			return isGreater.test(a, b) ? 1 : a.equals(b) ? 0 : -1;
-		}
+        @Override
+        public int compare(K a, K b) {
+            return isGreater.test(a, b) ? 1 : a.equals(b) ? 0 : -1;
+        }
         
     }
 

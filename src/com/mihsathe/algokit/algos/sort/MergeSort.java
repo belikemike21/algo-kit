@@ -6,7 +6,7 @@ import java.util.function.BiPredicate;
 
 public class MergeSort<K> implements Sorter<K> {
 
-	@Override
+    @Override
     public String getAlgorithmName() {
         return "MergeSort";
     }

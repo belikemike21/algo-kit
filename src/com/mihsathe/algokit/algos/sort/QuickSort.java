@@ -5,7 +5,7 @@ import java.util.function.BiPredicate;
 
 public class QuickSort<K> implements Sorter<K> {
 
-	@Override
+    @Override
     public String getAlgorithmName() {
         return "QuickSort";
     }

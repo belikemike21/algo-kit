@@ -61,7 +61,7 @@ public class SortingTests {
     private void testPreSortedNumbers(final Sorter<Double> sorter) {
         refreshInput();
 
-    	    final long startTime = Instant.now().toEpochMilli();
+            final long startTime = Instant.now().toEpochMilli();
         final List<Double> output = sorter.sort(inputPre, (a, b) -> a > b);
         final long endTime = Instant.now().toEpochMilli();
 

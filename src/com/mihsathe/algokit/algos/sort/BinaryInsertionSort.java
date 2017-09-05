@@ -23,9 +23,9 @@ public class BinaryInsertionSort<K extends Comparable<K>> implements Sorter<K> {
     public List<K> sort(final List<K> input, final BiPredicate<K, K> isGreater) {
         BinarySearch<K> searcher = new BinarySearch<>();
 
-    	    for(int i=0; i<input.size(); i++) {
-        	    final int position = searcher.search(input, 0, i-1, input.get(i), isGreater);
-        	    input.add(position, input.get(i));
+            for(int i=0; i<input.size(); i++) {
+                final int position = searcher.search(input, 0, i-1, input.get(i), isGreater);
+                input.add(position, input.get(i));
             input.remove(i+1);
         }
 
