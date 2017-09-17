@@ -1,6 +1,7 @@
 package com.mihsathe.algokit.algos.sort;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -23,6 +24,14 @@ public class ConcurrentMergeSort<K> implements Sorter<K> {
 
     @Override
     public List<K> sort(final List<K> input, final BiPredicate<K, K> isGreater) {
+        int sortedResult = isSorted(input, isGreater);
+
+        if (sortedResult == 1) return input;
+        if (sortedResult == -1) {
+            Collections.reverse(input);
+            return input;
+        }
+
         final Future<List<K>> future = threadPool.submit(new SorterThread<>(input, isGreater, threadPool, 1));
         try {
             return future.get();

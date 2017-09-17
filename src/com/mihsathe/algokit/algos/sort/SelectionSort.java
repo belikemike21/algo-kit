@@ -1,5 +1,6 @@
 package com.mihsathe.algokit.algos.sort;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.function.BiPredicate;
 
@@ -10,6 +11,14 @@ public class SelectionSort<K extends Comparable<K>> implements Sorter<K> {
     }
 
     public List<K> sort(final List<K> input, final BiPredicate<K, K> isGreater) {
+        int sortedResult = isSorted(input, isGreater);
+
+        if (sortedResult == 1) return input;
+        if (sortedResult == -1) {
+            Collections.reverse(input);
+            return input;
+        }
+
         final int size = input.size();
 
         // Pick one number at a time
