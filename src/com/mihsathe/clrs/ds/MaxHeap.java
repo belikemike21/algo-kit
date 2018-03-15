@@ -3,22 +3,23 @@ package com.mihsathe.clrs.ds;
 import com.mihsathe.algokit.annotations.NotThreadSafe;
 
 /**
- * Represents a MAX-HEAP for integers as described in chapter 6.
+ * Represents a MAX-HEAP for comparables as described in chapter 6.
  * 
  * Terminology:
  * HeapI - 1 based position in heap
  * ArrayI - 0 based position in array
  *
  * @author mihirsathe
+ * @param <X>
  */
 @NotThreadSafe
-public class MaxHeap {
+public class MaxHeap <K extends Comparable<K>> {
 
     /**
      * Array to represent the data of the heap.
      */
-    private int [] heap;
-    
+    private K [] heap;
+
     /**
      * Length to represent the portion of this array that's considered heap.
      */
@@ -30,10 +31,10 @@ public class MaxHeap {
      * @param heap base array to construct a heap from.
      * @param heapLength part of the array that needs to be heapified. 
      */
-    public MaxHeap(final int[] heap, final int heapLength) {
+    public MaxHeap(final K[] heap, final int heapLength) {
         this.heap = heap;
         this.heapLength = heapLength;
-        
+
         buildHeap(heapLength);
     }
 
@@ -55,16 +56,16 @@ public class MaxHeap {
 
         int maxPos = rootHeapI;
 
-        if (left <= heapLength && heap[arrayI(left)] > heap[arrayI(rootHeapI)]) {
+        if (left <= heapLength && heap[arrayI(left)].compareTo(heap[arrayI(rootHeapI)]) > 0) {
             maxPos = left;
         }
         
-        if (right <= heapLength && heap[arrayI(right)] > heap[arrayI(maxPos)]) {
+        if (right <= heapLength && heap[arrayI(right)].compareTo(heap[arrayI(maxPos)]) > 0) {
             maxPos = right;
         }
 
         if (maxPos != rootHeapI) {
-            int temp = heap[arrayI(rootHeapI)];
+            final K temp = heap[arrayI(rootHeapI)];
             heap[arrayI(rootHeapI)] = heap[arrayI(maxPos)];
             heap[arrayI(maxPos)] = temp;
             
@@ -93,14 +94,14 @@ public class MaxHeap {
             // Push the largest element towards the end and reduce the length.
             int replaceI = heapLength--;
 
-            int temp = heap[arrayI(replaceI)];
+            K temp = heap[arrayI(replaceI)];
             heap[arrayI(replaceI)] = heap[0];
             heap[0] = temp;
 
         } while (heapLength > 1);
     }
 
-    public int[] getUnderlyingArray() {
+    public K[] getUnderlyingArray() {
         return heap;
     }
 
