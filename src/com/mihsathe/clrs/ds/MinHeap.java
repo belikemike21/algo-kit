@@ -3,7 +3,7 @@ package com.mihsathe.clrs.ds;
 import com.mihsathe.algokit.annotations.NotThreadSafe;
 
 /**
- * Represents a MAX-HEAP for integers as described in chapter 6.
+ * Represents a MIN-HEAP for integers as described in chapter 6.
  * 
  * Terminology:
  * HeapI - 1 based position in heap
@@ -12,7 +12,7 @@ import com.mihsathe.algokit.annotations.NotThreadSafe;
  * @author mihirsathe
  */
 @NotThreadSafe
-public class MaxHeap {
+public class MinHeap {
 
     /**
      * Array to represent the data of the heap.
@@ -23,14 +23,14 @@ public class MaxHeap {
      * Length to represent the portion of this array that's considered heap.
      */
     private int heapLength;
-    
+
     /**
      * Constructor to make a heap out of the given array.
      * 
      * @param heap base array to construct a heap from.
      * @param heapLength part of the array that needs to be heapified. 
      */
-    public MaxHeap(final int[] heap, final int heapLength) {
+    public MinHeap(final int[] heap, final int heapLength) {
         this.heap = heap;
         this.heapLength = heapLength;
         
@@ -40,7 +40,7 @@ public class MaxHeap {
     /**
      * Heapify to maintain the heap property from given heap index as root.
      */
-    public void maxHeapify(final int rootHeapI) {
+    public void minHeapify(final int rootHeapI) {
         if(rootHeapI > heapLength) {
             // We're being asked to heapify something outside this heap
             throw new IllegalArgumentException();
@@ -53,23 +53,23 @@ public class MaxHeap {
         final int left = rootHeapI * 2;
         final int right = rootHeapI * 2 + 1;
 
-        int maxPos = rootHeapI;
+        int minPos = rootHeapI;
 
-        if (left <= heapLength && heap[arrayI(left)] > heap[arrayI(rootHeapI)]) {
-            maxPos = left;
+        if (left <= heapLength && heap[arrayI(left)] < heap[arrayI(rootHeapI)]) {
+            minPos = left;
         }
         
-        if (right <= heapLength && heap[arrayI(right)] > heap[arrayI(maxPos)]) {
-            maxPos = right;
+        if (right <= heapLength && heap[arrayI(right)] < heap[arrayI(minPos)]) {
+            minPos = right;
         }
 
-        if (maxPos != rootHeapI) {
+        if (minPos != rootHeapI) {
             int temp = heap[arrayI(rootHeapI)];
-            heap[arrayI(rootHeapI)] = heap[arrayI(maxPos)];
-            heap[arrayI(maxPos)] = temp;
+            heap[arrayI(rootHeapI)] = heap[arrayI(minPos)];
+            heap[arrayI(minPos)] = temp;
             
             // Recurse
-            maxHeapify(maxPos);
+            minHeapify(minPos);
         }
     }
 
@@ -80,24 +80,7 @@ public class MaxHeap {
         heapLength = newLength;
         int lastNonLeaf = heapLength / 2;
         
-        for (int i = lastNonLeaf; i >= 1; i--) maxHeapify(i);
-    }
-
-    /**
-     * Sort with heap-sort. Turns heap length to 0 and array is sorted.
-     */
-    public void heapSort() {
-        do {
-            buildHeap(heapLength);
-            
-            // Push the largest element towards the end and reduce the length.
-            int replaceI = heapLength--;
-
-            int temp = heap[arrayI(replaceI)];
-            heap[arrayI(replaceI)] = heap[0];
-            heap[0] = temp;
-
-        } while (heapLength > 1);
+        for (int i = lastNonLeaf; i >= 1; i--) minHeapify(i);
     }
 
     public int[] getUnderlyingArray() {
